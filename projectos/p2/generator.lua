@@ -7,7 +7,7 @@ local charset = {
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
 }
 
-local cmds = {'a', 'a', 'a', 'a', 'a', 'a', 'r', 'r', 'r', 'a', 'r', 'a', 'r', 'a', 'a', 'a', 'l', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'r', 'r', 'e', 'e', 'r', 'r', 'e', 'e', 'c', 'c', 'c', 'c', 'a', 'a', 'a', 'a', 'a', 'a', 'r', 'r', 'r', 'a', 'r', 'a', 'r', 'a', 'a', 'a', 'c', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'r', 'r', 'e', 'e', 'r', 'r', 'e', 'e', 'c', 'c', 'c', 'c'}
+local cmds = {}
 
 local contact_names = {}
 local mail_domains = {}
@@ -15,7 +15,7 @@ local mail_domains = {}
 -- We use this when we don't want to have equal chances :)
 function unfair_random(a)
     local aux = math.random(1, a*100)/(a*100)
-    aux = aux^10 -- since the values are between 0 and 1, this will make larger values more rare
+    aux = aux^6 -- since the values are between 0 and 1, this will make larger values more rare
 
     return math.ceil(aux * a)
 end
@@ -147,7 +147,26 @@ while n <= 0 do
     print("Number of commands?")
     n = io.read("*n")
 end
-local fn = "tests-community/community_test_"..tostring(n).."_"..math.random(1, 1024)..".in"
+
+local cmdset = ""
+print("Now assign values to each command so that commands with higher values are more common.")
+print("Commands with the value zero won't appear in the test.")
+
+for _,char in pairs({'a', 'l', 'p', 'r', 'e', 'c'}) do
+    local m = -1
+    while m < 0 do
+        print("Probability of "..char.."?")
+        m = io.read("*n")
+    end
+    if m > 0 then
+        cmdset = cmdset..char
+        for i = 1, m do
+            table.insert(cmds, char)
+        end
+    end
+end
+
+local fn = "tests-community/community_test_"..cmdset.."_"..tostring(n).."_"..math.random(1, 10000)..".in"
 print("Flushing to "..fn.."...")
 
 os.execute("mkdir tests-community")
