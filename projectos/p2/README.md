@@ -4,7 +4,7 @@
 
 ## LOG alterações
 
-Adicionei mais alguns testes a título não-oficial juntamente com um script que gera esses mesmos testes. Não tenho a absoluta certeza de que os mesmos estejam corretos mas a ideia é apenas de complementaridade e, noutro contexto, de _stress testing_ dos programas (inputs ridiculamente altos).
+Adicionei mais alguns testes a título não-oficial juntamente com um script que gera esses mesmos testes. Não tenho a absoluta certeza de que os mesmos estejam corretos mas a ideia é apenas de complementaridade e, noutro contexto, de _stress testing_ dos programas (inputs ridiculamente grandes).
 
 ## 1. Introdução
 
